@@ -38,7 +38,8 @@ import align.detect_face
 
 def main(args):
 
-    images = load_and_align_data(args.image_files, args.image_size, args.margin, args.gpu_memory_fraction)
+    #images = load_and_align_data(args.image_files, args.image_size, args.margin, args.gpu_memory_fraction)
+    images = no_align(args.image_files,args.image_size)
     with tf.Graph().as_default():
 
         with tf.Session() as sess:
@@ -111,6 +112,18 @@ def load_and_align_data(image_paths, image_size, margin, gpu_memory_fraction):
         img_list.append(prewhitened)
     images = np.stack(img_list)
     return images
+
+def no_align(image_paths,image_size):
+    img_list = []
+    for image in image_paths:
+        img = misc.imread(os.path.expanduser(image), mode='RGB')
+        aligned = misc.imresize(img, (image_size, image_size), interp='bilinear')
+        prewhitened = facenet.prewhiten(aligned)
+        img_list.append(prewhitened)
+    images = np.stack(img_list)
+    return images
+
+
 
 def parse_arguments(argv):
     parser = argparse.ArgumentParser()
