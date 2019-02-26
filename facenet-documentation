@@ -1,6 +1,6 @@
 python src/train_tripletloss.py --logs_base_dir ~/logs/facenet/ --models_base_dir /data/similarity/facenet-test/facenet/models/facenet/ --data_dir /data/idscam-crops/smaller_dataset/train --image_size 160 --model_def models.inception_resnet_v1 --optimizer RMSPROP --learning_rate 0.01 --weight_decay 1e-4 --max_nrof_epochs 500
 
-Above is the command for beginning training.
+Above is the command for beginning training. All data in /data/idscam-crops
 
 Testing - The compare_n_random testing script works in the following way :
 
